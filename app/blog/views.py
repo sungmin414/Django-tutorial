@@ -60,3 +60,21 @@ def post_detail(request, post_id):
     # post_detail view function이 올바르게 동작하는 html을 작성해서 결과 보기
 
     return render(request, 'blog/post_detail.html', context)
+
+
+
+def post_create(request):
+    if request.method == 'POST':
+        # request의 method값이 'POST'일 경우 (POST method로 요청이 왔을 경우)
+        # request.POST에 있는 title, text값과
+        # request.user에 있는 User인스턴스(로그인한 유저)속성을 사용해서
+        # 새 Post인스턴스를 생성
+        # HttpResponse를 사용해 새로 생성된 인스턴스의 id, title, text정보를 출력 (string)
+        post = Post.objects.create(
+            author = request.user,
+            title = request.POST['title'],
+            text = request.POST['text'],
+        )
+        return HttpResponse('id: {}, title: {}, text: {}'.format(post.id,post.title,post.text))
+    else:
+        return render(request,'blog/post_create.html')
