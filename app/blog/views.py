@@ -58,5 +58,5 @@ def post_detail(request, post_id):
         'post' : post,
     }
     # post_detail view function이 올바르게 동작하는 html을 작성해서 결과 보기
-    
+
     return render(request, 'blog/post_detail.html', context)
