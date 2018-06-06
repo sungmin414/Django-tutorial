@@ -8,8 +8,9 @@ urlpatterns = [
     # view function
     #   -> request를 받아서 response를 돌려주는 함
 
-    url(r'^$', post_list),
+    url(r'^$', post_list, name='post-list'),
     # 정규표현식에 그룹을 지정해서 view function의
     # 인수로 전달한다
-    url(r'^(\d+)/',post_detail ),
+    url(r'^/(\d+)/', post_detail, name='post-detail'),
+
 ]
