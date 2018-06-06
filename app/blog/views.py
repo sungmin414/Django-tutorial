@@ -24,16 +24,29 @@ def post_list(request):
     # 위 명령어 줄여쓴 말
     # return render(request,'blog/post_list.html')
 
-    result = ''
-    for post in Post.objects.all():
-        result += f'-{post}<br/>'
-    return HttpResponse(result)
-    # Post instance에서 title속성에 접근가능
-    # HttpResponse에
-    #
-    # 글 목록
-    # - 격전 참여시..
-    # - 부정행위..
-    # - PBE
-    #
-    # 위 텍스트를 넣어서 리턴
+    # result = ''
+    # for post in Post.objects.all():
+    #     result += f'-{post}<br/>'
+    # return HttpResponse(result)
+    # # Post instance에서 title속성에 접근가능
+    # # HttpResponse에
+    # #
+    # # 글 목록
+    # # - 격전 참여시..
+    # # - 부정행위..
+    # # - PBE
+    # #
+    # # 위 텍스트를 넣어서 리턴
+    posts = Post.objects.all()
+    context = {
+        'posts': posts,
+    }
+    # render는 주어진 인수를 사용해서
+    # 1번째 인수 : HttpRequest  인스턴스
+    # 2번째 인수 : 문자열 (TEMPLATE['DIRS']를 기준으로 탐색할 템플릿 파일의 경로)
+    # 3번째 인수 : 템플릿을 렌더링할때 사용할 객체 모음
+    # return render(request, 'blog/post_list.html', context)
+    return render(request=request,
+                  template_name='blog/post_list.html',
+                  context=context,
+                  )
