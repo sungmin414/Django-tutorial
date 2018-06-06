@@ -4,6 +4,8 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.template.loader import render_to_string
 
+from .models import Post
+
 
 def post_list(request):
 
@@ -20,4 +22,18 @@ def post_list(request):
     # return HttpResponse(html)
 
     # 위 명령어 줄여쓴 말
-    return render(request,'blog/post_list.html')
+    # return render(request,'blog/post_list.html')
+
+    result = ''
+    for post in Post.objects.all():
+        result += f'-{post}<br/>'
+    return HttpResponse(result)
+    # Post instance에서 title속성에 접근가능
+    # HttpResponse에
+    #
+    # 글 목록
+    # - 격전 참여시..
+    # - 부정행위..
+    # - PBE
+    #
+    # 위 텍스트를 넣어서 리턴
