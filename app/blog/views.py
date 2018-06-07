@@ -82,3 +82,7 @@ def post_create(request):
         return redirect('post-list')
     else:
         return render(request,'blog/post_create.html')
+
+
+def post_delete(request, post_id):
+    return HttpResponse('post_delete view function')
