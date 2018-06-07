@@ -1,7 +1,7 @@
 import os
 
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 
 from .models import Post
@@ -37,7 +37,7 @@ def post_list(request):
     # # - PBE
     # #
     # # 위 텍스트를 넣어서 리턴
-    posts = Post.objects.all()
+    posts = Post.objects.order_by('-id')
     context = {
         'posts': posts,
     }
@@ -75,6 +75,10 @@ def post_create(request):
             title = request.POST['title'],
             text = request.POST['text'],
         )
-        return HttpResponse('id: {}, title: {}, text: {}'.format(post.id,post.title,post.text))
+        # Htt Redirection을 보낼 URL
+        # http://localhost:8000
+        # / 로 시작하면 절대경로, 절대경로의 시작은 도메인 (http://localhost:8000)
+
+        return redirect('post-list')
     else:
         return render(request,'blog/post_create.html')
