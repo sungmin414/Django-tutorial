@@ -111,9 +111,9 @@ def post_edit(request, post_id):
         # post-detail에 해당하는 URL을 만들어내려면,
         # (\d+)에 해당하는 부분을 채울 값이 함께 필요
         # return HttpResponseRedirect('/{}/'.format(post_id))
-            return redirect('post-detail', post_id)
+        return redirect('post-detail', post_id)
     # POST방식이면 어차피 위해서 return되므로 else문 생략
-        ctx = {
-            'post': post,
-        }
-        return render(request, 'blog/post_edit.html', ctx)
+    ctx = {
+        'post': post,
+    }
+    return render(request, 'blog/post_edit.html', ctx)
